@@ -37,7 +37,8 @@ BEGIN
     	cur1_loop: LOOP
         	FETCH cur1 INTO cur_date, kategori_produk, jlh;
             
-            IF (cur_date != last_date AND @counter > 0) OR (cur_date = last_date AND @counter >= @total_data) THEN
+            -- IF (cur_date != last_date AND @counter > 0) OR (cur_date = last_date AND @counter >= @total_data) THEN
+	    IF (cur_date != last_date AND @counter > 0) OR (@counter >= @total_data) THEN
             	SET @column_syntax = CONCAT("`Tanggal`, ", @column_syntax, "`Total Produk Terjual`");
                 
                 SET @tgl = CONCAT("'", DATE(last_date), "'");
@@ -66,6 +67,7 @@ BEGIN
             SET @counter = @counter + 1;
         	
             IF done THEN
+	    	SET @sql = "";
                 LEAVE cur1_loop;
             END IF;
         END LOOP cur1_loop;
