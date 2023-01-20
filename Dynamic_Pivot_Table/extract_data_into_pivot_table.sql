@@ -31,7 +31,7 @@ BEGIN
      	FROM `transaksi` WHERE MONTH(waktu_transaksi) = `selectedMonth`
      	GROUP BY tanggal_transaksi, kategori 
      	ORDER BY tanggal_transaksi, kategori 
-     ) as total_data;
+     ) as data_count;
     
     OPEN cur1;
     	cur1_loop: LOOP
